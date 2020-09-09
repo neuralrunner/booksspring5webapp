@@ -33,24 +33,31 @@ public class BootStrapData implements CommandLineRunner {
         Publisher gw = new Publisher("GamesWorkshop");
         gw.setCity("Nothingham");
         gw.setAddress("Willow Road, Lenton, NG7 2WS");
+        gw.setCountry("England");
 
         Publisher al = new Publisher("Aleph");
         al.setAddress("Rua Tabapuã, 81 - Itaim Bibi");
         al.setCity("São Paulo");
-
-        publisherRepository.save(gw);
-        publisherRepository.save(al);
+        al.setCountry("Brazil");
 
         wg.getBooks().add(neuro);
         neuro.getAuthors().add(wg);
+        neuro.setPublisher(al);
+        al.getBooks().add(neuro);
+
         rick.getBooks().add(wh40kr);
         wh40kr.getAuthors().add(rick);
+        wh40kr.setPublisher(gw);
+        gw.getBooks().add(wh40kr);
 
         authorRepository.save(wg);
         bookRepository.save(neuro);
 
         authorRepository.save(rick);
         bookRepository.save(wh40kr);
+
+        publisherRepository.save(gw);
+        publisherRepository.save(al);
 
         System.out.println("Started in Bootstrap");
         System.out.println("Number of Authors"+authorRepository.count());
