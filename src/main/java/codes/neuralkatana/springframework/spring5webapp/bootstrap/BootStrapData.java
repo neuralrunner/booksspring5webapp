@@ -42,22 +42,27 @@ public class BootStrapData implements CommandLineRunner {
 
         wg.getBooks().add(neuro);
         neuro.getAuthors().add(wg);
-        neuro.setPublisher(al);
-        al.getBooks().add(neuro);
 
         rick.getBooks().add(wh40kr);
         wh40kr.getAuthors().add(rick);
-        wh40kr.setPublisher(gw);
-        gw.getBooks().add(wh40kr);
+
+
 
         authorRepository.save(wg);
         bookRepository.save(neuro);
-
         authorRepository.save(rick);
         bookRepository.save(wh40kr);
 
-        publisherRepository.save(gw);
+        wh40kr.setPublisher(gw);
+        gw.getBooks().add(wh40kr);
+        neuro.setPublisher(al);
+        al.getBooks().add(neuro);
+
         publisherRepository.save(al);
+        publisherRepository.save(gw);
+        bookRepository.save(wh40kr);
+        bookRepository.save(neuro);
+
 
         System.out.println("Started in Bootstrap");
         System.out.println("Number of Authors"+authorRepository.count());
